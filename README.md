@@ -34,15 +34,15 @@ curl -sk https://user:pass@127.0.0.1:8989/about
 
 ## GOVC
 
-GOVC is bundled in this image to provide a easy client interface for testing VCSIM. If you need to enter the image, use docker `run docker run -it --entrypoint "/bin/bash" m451/vcsim`.
+GOVC is bundled in this image to provide a easy client interface for testing VCSIM. If you need to enter the image, use `docker run -it --entrypoint "/bin/bash" m451/vcsim`.
 Once inside the image you can use the following workflow to get basic information about the simulated environment
 
 ``` bash
-vcsim &
+./vcsim &
 export GOVC_URL=https://user:pass@127.0.0.1:8989/sdk GOVC_SIM_PID=YOUR_RETURNED_PID
 export GOVC_INSECURE=1
-govc -h
-govc about
+./govc -h
+./govc about
 # Name:         VMware vCenter Server (govmomi simulator)
 # Vendor:       VMware, Inc.
 # Version:      6.5.0
@@ -52,7 +52,7 @@ govc about
 # API version:  6.5
 # Product ID:   vpx
 # UUID:         dbed6e0c-bd88-4ef6-b594-21283e1c677f
-govc find
+./govc find
 # /
 # /DC0
 # /DC0/vm
@@ -76,7 +76,7 @@ govc find
 # /DC0/network/DVS0
 # /DC0/network/DVS0-DVUplinks-9
 # /DC0/network/DC0_DVPG0
-govc vm.info /DC0/vm/DC0_H0_VM0
+./govc vm.info /DC0/vm/DC0_H0_VM0
 # Name:           DC0_H0_VM0
 # Path:         /DC0/vm/DC0_H0_VM0
 # UUID:         98a933c7-e277-4a8d-ab79-c5ad9b772a83
@@ -87,19 +87,19 @@ govc vm.info /DC0/vm/DC0_H0_VM0
 # Boot time:    2018-12-12 07:47:10.7315036 +0000 UTC
 # IP address:
 # Host:         DC0_H0
-govc device.info -vm /DC0/vm/DC0_H0_VM0 disk-*
+./govc device.info -vm /DC0/vm/DC0_H0_VM0 disk-*
 # Name:       disk--201-0
 #   Type:     VirtualDisk
 #   Label:    disk--201-0
 #   Summary:  1,024 KB
 #   Key:      204
 #   File:     [LocalDS_0] DC0_H0_VM0/disk1.vmdk
-govc vm.disk.create -vm /DC0/vm/DC0_H0_VM0 \
+./govc vm.disk.create -vm /DC0/vm/DC0_H0_VM0 \
 -name DC0_H0_VM0/disk2.vmdk \
 -ds /DC0/datastore/LocalDS_0 \
 -size 10G
 # Creating disk
-govc device.info -vm /DC0/vm/DC0_H0_VM0 disk-*
+./govc device.info -vm /DC0/vm/DC0_H0_VM0 disk-*
 # Name:           disk--201-0
 #   Type:         VirtualDisk
 #   Label:        disk--201-0
