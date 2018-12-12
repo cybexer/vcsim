@@ -41,7 +41,10 @@ Once inside the image you can use the following workflow to get basic informatio
 ./vcsim &
 export GOVC_URL=https://user:pass@127.0.0.1:8989/sdk GOVC_SIM_PID=YOUR_RETURNED_PID
 export GOVC_INSECURE=1
+
+# See https://github.com/vmware/govmomi/blob/master/govc/USAGE.md
 ./govc -h
+
 ./govc about
 # Name:         VMware vCenter Server (govmomi simulator)
 # Vendor:       VMware, Inc.
@@ -52,6 +55,8 @@ export GOVC_INSECURE=1
 # API version:  6.5
 # Product ID:   vpx
 # UUID:         dbed6e0c-bd88-4ef6-b594-21283e1c677f
+
+#./govc find -h
 ./govc find
 # /
 # /DC0
@@ -76,6 +81,50 @@ export GOVC_INSECURE=1
 # /DC0/network/DVS0
 # /DC0/network/DVS0-DVUplinks-9
 # /DC0/network/DC0_DVPG0
+
+./govc -i
+# Folder:group-d1
+# Datacenter:datacenter-2
+# Folder:folder-3
+# VirtualMachine:vm-51
+# VirtualMachine:vm-54
+# VirtualMachine:vm-57
+# VirtualMachine:vm-60
+# Folder:folder-4
+# ComputeResource:computeresource-21
+# HostSystem:host-19
+# ResourcePool:resgroup-20
+# ClusterComputeResource:clustercomputeresource-24
+# HostSystem:host-30
+# HostSystem:host-37
+# HostSystem:host-44
+# ResourcePool:resgroup-23
+# Folder:folder-5
+# Datastore:/tmp/govcsim-DC0-LocalDS_0-716203461@folder-5
+# Folder:folder-6
+# Network:network-7
+# DistributedVirtualSwitch:dvs-9
+# DistributedVirtualPortgroup:dvportgroup-11
+# DistributedVirtualPortgroup:dvportgroup-13
+
+./govc -i /DC0/host/DC0_C0
+# ClusterComputeResource:clustercomputeresource-24
+# HostSystem:host-30
+# VirtualMachine:vm-60
+# HostSystem:host-37
+# HostSystem:host-44
+# VirtualMachine:vm-57
+# ResourcePool:resgroup-23
+
+./govc find -i /DC0/host/DC0_C0/DC0_C0_H0
+# HostSystem:host-30
+# VirtualMachine:vm-60
+
+./govc find -type s
+# /DC0/datastore/LocalDS_0
+./govc find -i -type s
+# Datastore:/tmp/govcsim-DC0-LocalDS_0-716203461@folder-5
+
 ./govc vm.info /DC0/vm/DC0_H0_VM0
 # Name:           DC0_H0_VM0
 # Path:         /DC0/vm/DC0_H0_VM0
@@ -87,6 +136,7 @@ export GOVC_INSECURE=1
 # Boot time:    2018-12-12 07:47:10.7315036 +0000 UTC
 # IP address:
 # Host:         DC0_H0
+
 ./govc device.info -vm /DC0/vm/DC0_H0_VM0 disk-*
 # Name:       disk--201-0
 #   Type:     VirtualDisk
@@ -94,11 +144,13 @@ export GOVC_INSECURE=1
 #   Summary:  1,024 KB
 #   Key:      204
 #   File:     [LocalDS_0] DC0_H0_VM0/disk1.vmdk
+
 ./govc vm.disk.create -vm /DC0/vm/DC0_H0_VM0 \
 -name DC0_H0_VM0/disk2.vmdk \
 -ds /DC0/datastore/LocalDS_0 \
 -size 10G
 # Creating disk
+
 ./govc device.info -vm /DC0/vm/DC0_H0_VM0 disk-*
 # Name:           disk--201-0
 #   Type:         VirtualDisk
