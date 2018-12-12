@@ -175,4 +175,12 @@ You may see the optional arguments by calling it's help:
 
 ``` bash
 python .\vcsimtest.py -h
+# usage: vcsimtest [-h] [-s HOSTNAME] [-p HOSTPORT] [--nossl] [--debug]
+# Test basic VCSIM functionality with PyVmomi.
+# optional arguments:
+#   -h, --help   show this help message and exit
+#   -s HOSTNAME  server hostname of the VCSIM.
+#   -p HOSTPORT  server SSL port of the VCSIM.
+#   --nossl      disable SSL validation.
+#   --debug      enable debug logging.
 ```
