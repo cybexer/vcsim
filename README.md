@@ -167,3 +167,12 @@ export GOVC_INSECURE=1
 #   Unit number:  0
 #   File:         [LocalDS_0] DC0_H0_VM0/disk2.vmdk
 ```
+
+## Testing with PyVmomi
+
+This project has a simple Python test script attached to validate the propper functionality between VCSIM and PyVmomi.
+You may see the optional arguments by calling it's help:
+
+``` bash
+python .\vcsimtest.py -h
+```
